@@ -1,7 +1,6 @@
 # aifixize - AI-Powered Code Fixer (Joke Edition)
 
-![Idea](https://github.com/drakoan/aifixize/raw/master/images/idea.png)
-
+![Idea](https://github.com/drakoan/aifixize/raw/master/images/idea.jpg)
 
 ## Description
 
