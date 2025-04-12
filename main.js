@@ -35,9 +35,10 @@ const attemptCall = fn => {
 
 const fixAndRetry = (fn, error, attempts, isEvalFix) => {
   let prompt = isEvalFix ?
-    `You gave me this code:\n\n${fn}\n\nBut i` :
-    `Here is my function:\n\n${fn.toString()}\n\nI`;
-  prompt += 't causes an error: ${error}\n\nFix it and return only the code of a new function, suitable for eval.';
+    `You gave me this code:\n\n${fn}\n\nBut it` :
+    `Here is my function:\n\n${fn.toString()}\n\nIt`;
+  prompt += ` causes an error: ${error}` +
+    `\n\nFix it and return only the code of a new function, suitable for eval.`;
 
   const fixedFnCode = OpenAI.chat(prompt);
   return aifixize(fixedFnCode, attempts - 1, true, error);
