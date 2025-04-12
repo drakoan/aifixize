@@ -4,15 +4,14 @@ const aifixize = (fn, attempts = 5, isEvalFix = false, error = null) => {
   }
 
   if (isEvalFix) {
-    const evalResult = attemptEval(fn);
-    return evalResult.success ?
-      aifixize(evalResult.value, attempts - 1, false, null) :
-      fixAndRetry(fn, evalResult.error, attempts, true);
-  } else {
-    const callResult = attemptCall(fn);
-    return callResult.success ? undefined :
-      fixAndRetry(fn, callResult.error, attempts, false);
+    const { success, value, error } = attemptEval(fn);
+    return success ?
+      aifixize(value, attempts - 1, false, null) :
+      fixAndRetry(fn, error, attempts, true);
   }
+
+  const { success, error } = attemptCall(fn);
+  return success || fixAndRetry(fn, error, attempts, false);
 };
 
 const attemptEval = code => {
